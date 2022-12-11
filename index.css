@@ -30,7 +30,6 @@ nav {
   align-items: center;
   justify-content: space-between;
 }
-
 nav .menu-btn {
   width: 20vw;
   margin: 0 2rem;
@@ -38,35 +37,108 @@ nav .menu-btn {
   justify-content: center;
   align-items: center;
 }
-
 nav .menu-btn button {
   font-size: 2rem;
   border: none;
   font-weight: var(--font-bold);
   text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
 }
-
 nav .theme-toggle {
   display: flex;
   margin: 0 2rem;
 }
-
 nav .theme-toggle button {
   border: none;
 }
-
 nav .theme-toggle button:hover {
   outline: none;
 }
-
 nav .theme-toggle button:nth-child(1) {
   background-color: tomato;
 }
-
 nav .theme-toggle button:nth-child(2) {
   background-color: lightyellow;
 }
-
 nav .theme-toggle button:nth-child(3) {
   background-color: lightgreen;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+p {
+  margin: var(--spacing-medium);
+}
+
+.container {
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "current current" "hourly hourly" "fiveday fiveday" "feelslike humidity";
+  width: 100%;
+  border: 2px solid black;
+}
+.container > article {
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 1rem;
+}
+.container > article div {
+  font-size: var(--font-rg);
+  font-weight: var(--font-semibold);
+}
+.container #current-forecast {
+  grid-area: current;
+}
+.container #current-forecast .location {
+  font-weight: var(--font-semibold);
+  font-size: var(--font-lg);
+}
+.container #current-forecast .temp {
+  font-weight: var(--font-bold);
+  font-size: var(--font-xl);
+}
+.container #current-forecast .status {
+  font-weight: var(--font-semibold);
+  font-size: var(--font-rg);
+}
+.container #current-forecast .min-max-temp {
+  font-weight: var(--font-semibold);
+  font-size: var(--font-rg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container #current-forecast .min-max-temp h4 {
+  margin: 0 var(--spacing-medium);
+}
+.container #hourly-forecast {
+  grid-area: hourly;
+  padding: var(--spacing-medium);
+}
+.container #hourly-forecast .hourly-forecast-container {
+  padding: var(--spacing-medium);
+  display: flex;
+  overflow-x: auto;
+}
+.container #hourly-forecast .hourly-forecast-container > article {
+  border: 1px solid black;
+  padding: var(--spacing-medium);
+  margin: var(--spacing-medium);
+}
+.container #hourly-forecast .hourly-forecast-container::-webkit-scrollbar {
+  visibility: hidden;
+}
+.container #fiveday-forecast {
+  grid-area: fiveday;
+}
+.container #feels-like {
+  grid-area: feelslike;
+}
+.container #humidity {
+  grid-area: humidity;
+}/*# sourceMappingURL=index.css.map */
