@@ -1,0 +1,72 @@
+:root {
+  --spacing-medium: 8px;
+  --spacing-regular: 16px;
+  --font-sm: 0.5rem;
+  --font-rg: 1rem;
+  --font-lg: 2rem;
+  --font-xl: 4rem;
+  --font-semibold: bold;
+  --font-bold: bolder;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: consolas, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  margin: auto;
+  background-color: rgba(1, 1, 1, 0.5);
+}
+
+nav {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .menu-btn {
+  width: 20vw;
+  margin: 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav .menu-btn button {
+  font-size: 2rem;
+  border: none;
+  font-weight: var(--font-bold);
+  text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+}
+
+nav .theme-toggle {
+  display: flex;
+  margin: 0 2rem;
+}
+
+nav .theme-toggle button {
+  border: none;
+}
+
+nav .theme-toggle button:hover {
+  outline: none;
+}
+
+nav .theme-toggle button:nth-child(1) {
+  background-color: tomato;
+}
+
+nav .theme-toggle button:nth-child(2) {
+  background-color: lightyellow;
+}
+
+nav .theme-toggle button:nth-child(3) {
+  background-color: lightgreen;
+}
