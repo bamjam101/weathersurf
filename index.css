@@ -30,36 +30,62 @@ nav {
   align-items: center;
   justify-content: space-between;
 }
-nav .menu-btn {
+nav .menu {
   width: 20vw;
   margin: 0 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: var(--spacing-regular);
 }
-nav .menu-btn button {
-  font-size: 2rem;
-  border: none;
+nav .menu header h1 {
   font-weight: var(--font-bold);
-  text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+  font-size: var(--font-rg);
 }
 nav .theme-toggle {
   display: flex;
   margin: 0 2rem;
+  gap: var(--spacing-medium);
 }
 nav .theme-toggle button {
+  -webkit-clip-path: circle(50% at 50% 50%);
+          clip-path: circle(50% at 50% 50%);
   border: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: transparent;
 }
 nav .theme-toggle button:hover {
-  outline: none;
+  box-shadow: 0 0 5px tomato;
 }
-nav .theme-toggle button:nth-child(1) {
+nav .theme-toggle .toggle-btn-wrapper:nth-child(1) {
+  border-radius: 50%;
+  transition: box-shadow 0.45s;
+}
+nav .theme-toggle .toggle-btn-wrapper:nth-child(1):hover {
+  box-shadow: inset 0 0 5px tomato, inset 0 0 10px tomato, 0 0 5px tomato, 0 0 10px tomato;
+}
+nav .theme-toggle .toggle-btn-wrapper:nth-child(1) button {
   background-color: tomato;
 }
-nav .theme-toggle button:nth-child(2) {
+nav .theme-toggle .toggle-btn-wrapper:nth-child(2) {
+  border-radius: 50%;
+  transition: box-shadow 0.45s;
+}
+nav .theme-toggle .toggle-btn-wrapper:nth-child(2):hover {
+  box-shadow: inset 0 0 5px lightyellow, inset 0 0 10px lightyellow, 0 0 5px lightyellow, 0 0 10px lightyellow;
+}
+nav .theme-toggle .toggle-btn-wrapper:nth-child(2) button {
   background-color: lightyellow;
 }
-nav .theme-toggle button:nth-child(3) {
+nav .theme-toggle .toggle-btn-wrapper:nth-child(3) {
+  border-radius: 50%;
+  transition: box-shadow 0.45s;
+}
+nav .theme-toggle .toggle-btn-wrapper:nth-child(3):hover {
+  box-shadow: inset 0 0 5px lightgreen, inset 0 0 10px lightgreen, 0 0 5px lightgreen, 0 0 10px lightgreen;
+}
+nav .theme-toggle .toggle-btn-wrapper:nth-child(3) button {
   background-color: lightgreen;
 }
 
@@ -77,15 +103,18 @@ p {
 .container {
   display: grid;
   place-content: center;
+  height: 90vh;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas: "current current" "hourly hourly" "fiveday fiveday" "feelslike humidity";
   width: 100%;
-  border: 2px solid black;
 }
 .container > article {
   text-align: center;
   border: 2px solid black;
-  border-radius: 1rem;
+  transition: background-color 0.45s;
+}
+.container > article:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .container > article div {
   font-size: var(--font-rg);
