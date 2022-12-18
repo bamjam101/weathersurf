@@ -20,6 +20,10 @@
       <header>
         <h1>WeatherSurf</h1>
       </header>
+      <input list="cities" type="search" name="search" id="search" placeholder="Search City..." autocomplete="off">
+      <datalist id="cities">
+        <option value="mumbai"></option>
+      </datalist>
     </div>
     <div class="theme-toggle">
       <div class="toggle-btn-wrapper"><button></button></div>
@@ -31,16 +35,14 @@
   <main class="container">
     <article id="current-forecast">
       <div class="location">
-        <h3>Pune</h3>
+        <h3></h3>
       </div>
       <div class="temp">
         <h1>
           <!-- Weather Report in Degree -->
-          35°
         </h1>
       </div>
       <div class="status">
-        <h3>Cloudy</h3>
         <!-- Weather Icon  -->
       </div>
       <div class="min-max-temp">
@@ -55,13 +57,7 @@
       </section>
     </article>
     <article id="fiveday-forecast">
-      <h3>Today</h3>
-      <p>somethings</p>
-      <p>somethings</p>
-
-      <h3>Tomorrow</h3>
-      <p>somethings</p>
-      <p>somethings</p>
+      <div class="fiveday-forecast-container"></div>
     </article>
     <article id="feels-like">
       <h2>Feels Like</h2>

@@ -32,7 +32,6 @@ nav {
 }
 nav .menu {
   width: 20vw;
-  margin: 0 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -155,15 +154,36 @@ p {
   overflow-x: auto;
 }
 .container #hourly-forecast .hourly-forecast-container > article {
-  border: 1px solid black;
   padding: var(--spacing-medium);
   margin: var(--spacing-medium);
+}
+.container #hourly-forecast .hourly-forecast-container > article .icon {
+  height: 50px;
+  width: 50px;
 }
 .container #hourly-forecast .hourly-forecast-container::-webkit-scrollbar {
   visibility: hidden;
 }
 .container #fiveday-forecast {
   grid-area: fiveday;
+}
+.container #fiveday-forecast .fiveday-forecast-container article {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 var(--spacing-regular);
+  gap: var(--spacing-regular);
+}
+.container #fiveday-forecast .fiveday-forecast-container article .day {
+  padding: var(--spacing-regular);
+  justify-self: start;
+}
+.container #fiveday-forecast .fiveday-forecast-container article .icon {
+  height: 50px;
+  width: 50px;
+}
+.container #fiveday-forecast .fiveday-forecast-container article .min-temp {
+  opacity: 50%;
 }
 .container #feels-like {
   grid-area: feelslike;

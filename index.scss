@@ -35,7 +35,6 @@ nav {
   justify-content: space-between;
   .menu {
     width: 20vw;
-    margin: 0 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,10 +118,6 @@ p {
     "feelslike humidity";
   width: 100%;
   & > article {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
     text-align: center;
     border: 2px solid black;
     transition: background-color 0.45s;
@@ -167,9 +162,12 @@ p {
       display: flex;
       overflow-x: auto;
       & > article {
-        border: 1px solid black;
         padding: var(--spacing-medium);
         margin: var(--spacing-medium);
+        .icon {
+          height: 50px;
+          width: 50px;
+        }
       }
       &::-webkit-scrollbar {
         visibility: hidden;
@@ -178,6 +176,26 @@ p {
   }
   #fiveday-forecast {
     grid-area: fiveday;
+    .fiveday-forecast-container {
+      article {
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 0 var(--spacing-regular);
+        gap: var(--spacing-regular);
+        .day {
+          padding: var(--spacing-regular);
+          justify-self: start;
+        }
+        .icon {
+          height: 50px;
+          width: 50px;
+        }
+        .min-temp {
+          opacity: 50%;
+        }
+      }
+    }
   }
   #feels-like {
     grid-area: feelslike;
