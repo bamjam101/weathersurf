@@ -1,11 +1,22 @@
 const API_KEY = `983095bb3517a0e4d1813c9053e1b997`;
+
 const DAYS_OF_THE_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+
+let selectedCityText;
+let selectedCity;
+
 
 const formatTemperature = (temp) => `${temp?.toFixed(1)}°`;
 const createIconUrl = (icon) => ` http://openweathermap.org/img/wn/${icon}@2x.png`;
 
-const getCurrentWeatherData = async (city) => {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+const getCititesUsingGeolocation = async (searchInp) => {
+  const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchInp}&limit=5&appid=${API_KEY}`);
+  return response.json();
+}
+
+const getCurrentWeatherData = async ({ lat, lon, name }) => {
+  const url = lat && lon ? `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric` : `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${API_KEY}&units=metric`;
+  const response = await fetch(url);
   return response.json();
 }
 
@@ -18,7 +29,7 @@ const loadCurrentForecast = ({ name, main: { temp, temp_max, temp_min }, weather
   currentForecast.querySelector(".min-max-temp").innerHTML = `L: ${formatTemperature(temp_min)} & H: ${formatTemperature(temp_max)}`;
 }
 
-const getHourlyWeatherData = async (city) => {
+const getHourlyWeatherData = async ({ name: city }) => {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`);
   const data = await response.json();
   return data.list.map(forecast => {
@@ -80,15 +91,6 @@ const loadFivedayForecast = (hourlyWeather) => {
   const daywiseForecast = calculateDaywiseForecast(hourlyWeather);
   const docFivedayForecastContainer = document.querySelector(".fiveday-forecast-container");
   let innerHTMLString = ``;
-  // console.log(daywiseForecast)
-  // const log = Array.from(daywiseForecast).map(entry => {
-  //   const day = entry[0];
-  //   const { temp_max, temp_min, icon } = entry[1]
-  //   const data = { day, temp_max, temp_min, icon }
-  //   return (
-  //     console.log(data)
-  //   )
-  // });
 
   Array.from(daywiseForecast).map(([day, { temp_max, temp_min, icon }], index) => {
     if (index < 5) {
@@ -116,12 +118,62 @@ const setHumidity = ({ main: { humidity } }) => {
   feelsLikeContainer.querySelector(".humidity-txt").innerHTML = `${humidity}%`;
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const currentWeather = await getCurrentWeatherData("mumbai");
+const debounce = (func) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, 750);
+  }
+}
+
+const onSearchTextChange = async (event) => {
+  let { value } = event.target;
+  if (!value) {
+    selectedCity = null;
+    selectedCityText = "";
+  }
+  if (value && selectedCityText !== value) {
+    const listOfCities = await getCititesUsingGeolocation(value);
+    let options = ``;
+
+    for (let { lat, lon, name, state, country } of listOfCities) {
+      options += `
+      <option data-city-details='${JSON.stringify({ lat, lon, name })}' value="${name}, ${state}, ${country}"></option
+      `;
+    }
+    document.querySelector("#cities").innerHTML = options;
+  }
+}
+
+const debounceSearch = debounce((event) => onSearchTextChange(event));
+
+const onCityChange = (event) => {
+  selectedCityText = event.target.value;
+  let options = document.querySelectorAll("#cities > option");
+  if (options?.length) {
+    let selectedOption = Array.from(options).find(option => option.value === selectedCityText);
+    selectedCity = JSON.parse(selectedOption.getAttribute('data-city-details'));
+
+    loadData();
+  }
+}
+
+const loadData = async () => {
+  const currentWeather = await getCurrentWeatherData(selectedCity);
   loadCurrentForecast(currentWeather);
-  const hourlyWeather = await getHourlyWeatherData("mumbai");
+  const hourlyWeather = await getHourlyWeatherData(currentWeather);
   loadHourlyForecast(currentWeather, hourlyWeather);
   setFeelsLike(currentWeather);
   setHumidity(currentWeather);
   loadFivedayForecast(hourlyWeather);
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const search = document.querySelector("#search");
+  search.addEventListener("input", debounceSearch);
+  search.addEventListener("change", onCityChange);
+
+
 });
