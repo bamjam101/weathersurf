@@ -5,7 +5,6 @@ const DAYS_OF_THE_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
 let selectedCityText;
 let selectedCity;
 
-
 const formatTemperature = (temp) => `${temp?.toFixed(1)}°`;
 const createIconUrl = (icon) => ` http://openweathermap.org/img/wn/${icon}@2x.png`;
 
@@ -118,6 +117,14 @@ const setHumidity = ({ main: { humidity } }) => {
   feelsLikeContainer.querySelector(".humidity-txt").innerHTML = `${humidity}%`;
 }
 
+const loadForecastUsingGeolocation = () => {
+  navigator.geolocation.getCurrentPosition(({ coords }) => {
+    const { latitude: lat, longitude: lon } = coords;
+    selectedCity = { lat, lon };
+    loadData();
+  }, error => console.log(error));
+}
+
 const debounce = (func) => {
   let timer;
   return (...args) => {
@@ -171,9 +178,8 @@ const loadData = async () => {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  loadForecastUsingGeolocation();
   const search = document.querySelector("#search");
   search.addEventListener("input", debounceSearch);
   search.addEventListener("change", onCityChange);
-
-
 });

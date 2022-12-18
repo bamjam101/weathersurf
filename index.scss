@@ -23,18 +23,18 @@ body {
   margin: 0;
   padding: 0;
   width: 400px;
-  margin: auto;
-  background-color: rgba(1, 1, 1, 0.5);
+  display: grid;
+  place-items: center;
 }
 
 nav {
   width: 100%;
   height: 10vh;
   display: flex;
+  padding: 0 --spacing-medium;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   .menu {
-    width: 20vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,10 +43,14 @@ nav {
       font-weight: var(--font-bold);
       font-size: var(--font-rg);
     }
+    input {
+      text-align: center;
+      padding: var(--spacing-medium) 0;
+    }
   }
   .theme-toggle {
     display: flex;
-    margin: 0 2rem;
+    margin: 0 var(--spacing-medium);
     gap: var(--spacing-medium);
     button {
       clip-path: circle(50% at 50% 50%);
@@ -202,5 +206,32 @@ p {
   }
   #humidity {
     grid-area: humidity;
+  }
+}
+
+@media screen and (width > 650px) {
+  body {
+    width: 100vw;
+  }
+
+  nav {
+    width: 100%;
+    .menu {
+      width: 50%;
+      display: grid;
+      grid-template-columns: repeat(2, 0.5fr 1.5fr);
+      input {
+        width: 400px;
+      }
+    }
+  }
+
+  .container {
+    display: grid;
+    width: 70%;
+    grid-template-areas:
+      "current current current current"
+      "hourly hourly fiveday fiveday"
+      "feelslike humidity fiveday fiveday";
   }
 }
