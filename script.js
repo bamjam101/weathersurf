@@ -177,7 +177,21 @@ const loadData = async () => {
   loadFivedayForecast(hourlyWeather);
 }
 
+const loading = () => {
+  const bodyElement = document.querySelector(".container");
+  const loader = document.querySelector("#loader");
+
+  loader.style.opacity = "100%";
+  setTimeout(() => {
+    loader.style.opacity = "0%";
+    bodyElement.style.opacity = "100%";
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 1000);
+  }, 2500);
+}
 document.addEventListener("DOMContentLoaded", async () => {
+  loading();
   loadForecastUsingGeolocation();
   const search = document.querySelector("#search");
   search.addEventListener("input", debounceSearch);

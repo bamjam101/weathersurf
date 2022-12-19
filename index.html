@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather Surf</title>
-  <script src="script.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="animate.js"></script>
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
@@ -17,35 +18,37 @@
   <nav>
     <div class="menu">
       <header>
-        <h1>WeatherSurf</h1>
+        <h1>W<span>eathersurf</span></h1>
       </header>
       <input list="cities" type="search" name="search" id="search" placeholder="Search City..." autocomplete="off">
       <datalist id="cities">
       </datalist>
     </div>
     <div class="theme-toggle">
-      <div class="toggle-btn-wrapper"><button></button></div>
-      <div class="toggle-btn-wrapper"><button></button></div>
-      <div class="toggle-btn-wrapper"><button></button></div>
+      <div class="toggle-btn-wrapper"><button id="red"></button></div>
+      <div class="toggle-btn-wrapper"><button id="yellow"></button></div>
+      <div class="toggle-btn-wrapper"><button id="green"></button></div>
     </div>
   </nav>
 
   <main class="container">
     <article id="current-forecast">
       <div class="location">
-        <h3></h3>
+        <h3>--</h3>
       </div>
       <div class="temp">
         <h1>
           <!-- Weather Report in Degree -->
+          --
         </h1>
       </div>
       <div class="status">
         <!-- Weather Icon  -->
+        --ICON--
       </div>
       <div class="min-max-temp">
-        <h4>H:</h4>
-        <h4>L:</h4>
+        <h4>H: --</h4>
+        <h4>L: --</h4>
       </div>
     </article>
     <article id="hourly-forecast">
@@ -55,17 +58,19 @@
       </section>
     </article>
     <article id="fiveday-forecast">
+      <h1>Fiveday-forecast</h1>
       <div class="fiveday-forecast-container"></div>
     </article>
     <article id="feels-like">
       <h2>Feels Like</h2>
-      <p class="feelslike-txt">37°</p>
+      <p class="feelslike-txt">--</p>
     </article>
     <article id="humidity">
       <h2>Humidity</h2>
-      <p class="humidity-txt">70%</p>
+      <p class="humidity-txt">--</p>
     </article>
   </main>
+  <div id="loader"></div>
 </body>
 
 </html>
