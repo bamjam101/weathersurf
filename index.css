@@ -13,27 +13,7 @@
     rgba(72, 72, 83, 1) 50%,
     rgba(163, 176, 179, 1) 100%
   );
-  --red: linear-gradient(
-    145deg,
-    rgba(189, 24, 58, 1) 0%,
-    rgba(147, 9, 9, 1) 25%,
-    rgba(32, 6, 6, 1) 90%
-  );
-  --yellow: linear-gradient(
-    145deg,
-    rgba(241, 255, 0, 1) 0%,
-    rgba(177, 162, 58, 1) 50%,
-    rgba(134, 123, 22, 1) 90%
-  );
-  --green: linear-gradient(
-    145deg,
-    rgba(180, 255, 98, 1) 0%,
-    rgba(52, 164, 13, 1) 35%,
-    rgba(4, 102, 43, 1) 90%
-  );
-  --txt-color: whitesmoke;
-  --txt-light: whitesmoke;
-  --txt-dark: rgba(30, 30, 30, 0.845);
+  --text-color: whitesmoke;
 }
 
 * {
@@ -42,49 +22,55 @@
   font-family: consolas, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+html {
+  font-size: 60%;
+}
+
 body {
+  position: relative;
   margin: 0;
   padding: 0;
   width: 400px;
   display: grid;
   place-items: center;
+  overflow-x: hidden;
   background: rgb(26, 26, 27);
-  background: var(--dark);
-  background-position: left;
-  background-size: 300%;
-  -webkit-animation: flow 5s infinite alternate;
-          animation: flow 5s infinite alternate;
-  color: var(--txt-color);
+  color: var(--text-color);
 }
 
-@-webkit-keyframes flow {
-  0% {
-    background-position: left;
+.wave {
+  width: 200%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  -webkit-animation: wave ease-in-out 20s infinite alternate;
+          animation: wave ease-in-out 20s infinite alternate;
+}
+
+@-webkit-keyframes wave {
+  from {
+    transform: translateX(0);
   }
-  50% {
-    background-position: center;
-  }
-  100% {
-    background-position: right;
+  to {
+    transform: translateX(-50%);
   }
 }
 
-@keyframes flow {
-  0% {
-    background-position: left;
+@keyframes wave {
+  from {
+    transform: translateX(0);
   }
-  50% {
-    background-position: center;
-  }
-  100% {
-    background-position: right;
+  to {
+    transform: translateX(-50%);
   }
 }
 nav {
-  width: 100%;
+  width: 50%;
   height: 10vh;
   display: flex;
-  padding: 0 --spacing-medium;
+  padding: 0 var(--spacing-medium);
   align-items: center;
   justify-content: space-evenly;
 }
@@ -93,17 +79,17 @@ nav .menu {
   justify-content: center;
   align-items: center;
   gap: var(--spacing-regular);
+  padding: 1rem;
 }
 nav .menu header h1 {
   font-weight: var(--font-bold);
-  font-size: 1.8rem;
-  font-family: cursive;
-  letter-spacing: normal;
+  font-size: 1.6rem;
+  letter-spacing: 4px;
 }
 nav .menu header h1 span {
   font-family: consolas;
   letter-spacing: 2px;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: var(--font-semibold);
 }
 nav .menu input {
@@ -228,7 +214,6 @@ p {
 }
 .container #hourly-forecast .hourly-forecast-container > article {
   padding: var(--spacing-medium);
-  margin: var(--spacing-medium);
 }
 .container #hourly-forecast .hourly-forecast-container > article .icon {
   height: 50px;
@@ -312,6 +297,9 @@ p {
   }
 }
 @media screen and (width > 650px) {
+  html {
+    font-size: 100%;
+  }
   body {
     width: 100vw;
   }
