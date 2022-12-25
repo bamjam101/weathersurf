@@ -23,24 +23,29 @@
 }
 
 html {
-  font-size: 60%;
+  font-size: 70%;
 }
 
 body {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
-  width: 400px;
+  width: 100vw;
   display: grid;
   place-items: center;
-  overflow-x: hidden;
+  overflow: hidden;
   background: rgb(26, 26, 27);
   color: var(--text-color);
 }
 
 .wave {
+  display: none;
   width: 200%;
   position: absolute;
+  overflow: hidden;
   height: 100%;
   top: 0;
   left: 0;
@@ -96,8 +101,22 @@ nav .menu input {
   text-align: center;
   padding: var(--spacing-medium) 0;
 }
+nav .menu .location-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+nav .menu .location-btn .location-icon {
+  font-size: 1.2rem;
+  color: whitesmoke;
+  cursor: pointer;
+  transition: font-size 0.45s;
+}
+nav .menu .location-btn .location-icon:hover {
+  font-size: 1.5rem;
+}
 nav .theme-toggle {
-  display: flex;
+  display: none;
   margin: 0 var(--spacing-medium);
   gap: var(--spacing-medium);
 }
@@ -158,8 +177,9 @@ p {
   opacity: 0%;
   transition: opacity 0.45s;
   display: grid;
-  position: relative;
   place-content: center;
+  width: 80%;
+  overflow: hidden;
   height: 90vh;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas: "current current" "hourly hourly" "fiveday fiveday" "feelslike humidity";
@@ -210,7 +230,7 @@ p {
 .container #hourly-forecast .hourly-forecast-container {
   padding: var(--spacing-medium);
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 .container #hourly-forecast .hourly-forecast-container > article {
   padding: var(--spacing-medium);
@@ -296,23 +316,29 @@ p {
     background-position: right;
   }
 }
-@media screen and (width > 650px) {
+@media screen and (width > 1200px) {
   html {
-    font-size: 100%;
+    font-size: 80%;
   }
   body {
     width: 100vw;
   }
   nav {
-    width: 100%;
+    width: 50%;
   }
   nav .menu {
-    width: 50%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 0.5fr 1.5fr);
   }
   nav .menu input {
     width: 400px;
+  }
+  body .wave {
+    display: block;
+  }
+  body .theme-toggle {
+    display: flex;
   }
   .container {
     display: grid;

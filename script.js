@@ -3,7 +3,7 @@ const API_KEY = `983095bb3517a0e4d1813c9053e1b997`;
 const DAYS_OF_THE_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
 
 let selectedCityText;
-let selectedCity;
+let selectedCity = { lat: "19.191961", lon: "72.815414" };
 
 const formatTemperature = (temp) => `${temp?.toFixed(1)}°`;
 const createIconUrl = (icon) => ` http://openweathermap.org/img/wn/${icon}@2x.png`;
@@ -191,8 +191,12 @@ const loading = () => {
   }, 2500);
 }
 document.addEventListener("DOMContentLoaded", async () => {
+  const location = document.querySelector(".location-btn");
   loading();
-  loadForecastUsingGeolocation();
+  loadData();
+  location.addEventListener("click", () => {
+    loadForecastUsingGeolocation();
+  })
   const search = document.querySelector("#search");
   search.addEventListener("input", debounceSearch);
   search.addEventListener("change", onCityChange);
